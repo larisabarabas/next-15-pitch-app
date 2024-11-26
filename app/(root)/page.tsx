@@ -3,7 +3,7 @@ import SearchForm from "@/components/SearchForm";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ query?: string }>;
+  readonly searchParams: Promise<{ query?: string }>;
 }) {
   const query = (await searchParams).query;
   return (
