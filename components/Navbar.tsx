@@ -12,7 +12,7 @@ const Navbar = async () => {
           <Image src="/logo.png" alt="Pitch App Logo" width={144} height={30} />
         </Link>
         <div className="flex items-center gap-5 text-black">
-          {session && session?.user ? (
+          {session?.user ? (
             <>
               <Link href="/startup/create">
                 <span>Create</span>
