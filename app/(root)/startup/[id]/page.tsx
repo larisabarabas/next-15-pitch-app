@@ -3,8 +3,13 @@ import { client } from "@/sanity/lib/client";
 import { STARTUP_BY_ID_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
+import markdownit from "markdown-it";
+import { Skeleton } from "@/components/ui/skeleton";
+import View from "@/components/View";
+
+const markdown = markdownit();
 
 export const experimental_ppr = true;
 
@@ -13,6 +18,9 @@ const Startup = async ({ params }: { params: Promise<{ id: string }> }) => {
   console.log(id);
   const post = await client.fetch(STARTUP_BY_ID_QUERY, { id });
   if (!post) return notFound();
+
+  const parsedContent = markdown.render(post?.pitch ?? "");
+
   return (
     <>
       <section className="pink_container !min-h-[230px]">
@@ -49,7 +57,20 @@ const Startup = async ({ params }: { params: Promise<{ id: string }> }) => {
             <p className="category-tag">{post.category}</p>
           </div>
           <h3 className="text-30-bold">Pitch Details</h3>
+          {parsedContent ? (
+            <article
+              className="prose max-w-4xl font-work-sans"
+              dangerouslySetInnerHTML={{ __html: parsedContent }}
+            ></article>
+          ) : (
+            <p className="no-result">No details provided</p>
+          )}
         </div>
+        <hr className="divider" />
+        {/* TODO: Editor selected startups */}
+        <Suspense fallback={<Skeleton className="view_skeleton" />}>
+          <View id={id}></View>
+        </Suspense>
       </section>
     </>
   );
