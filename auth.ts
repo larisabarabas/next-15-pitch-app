@@ -33,20 +33,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     async jwt({ token, account, profile }) {
       if (account && profile) {
-        console.log("PROFILE:", profile);
         const user = await client
           .withConfig({ useCdn: false })
           .fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
             id: profile?.id,
           });
         console.log("USER:", user);
-        token.id = profile?.id;
+        token.id = user?.id;
       }
 
       return token;
     },
     async session({ session, token }) {
-      console.log("TOKEN:", token);
       Object.assign(session, { id: token.id });
       return session;
     },
