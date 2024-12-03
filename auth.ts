@@ -38,7 +38,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           .fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
             id: profile?.id,
           });
-        console.log("USER:", user);
         token.id = user?.id;
       }
 
