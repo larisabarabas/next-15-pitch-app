@@ -8,7 +8,7 @@ export const STARTUPS_QUERY = defineQuery(
         views, 
         _createdAt, 
         slug, 
-        author -> {_id, name, username}, 
+        author -> {_id, name, username, image}, 
         image,
         category
       }`
