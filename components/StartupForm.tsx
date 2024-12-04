@@ -51,7 +51,6 @@ const StartupForm = () => {
       return result;
     } catch (error) {
       if (error instanceof z.ZodError) {
-        console.log("FROM CATCH ERROR:", formValues);
         const fieldErorrs = error.flatten().fieldErrors;
 
         setErrors(fieldErorrs as unknown as Record<string, string>);
@@ -76,7 +75,7 @@ const StartupForm = () => {
       });
 
       return {
-        ...prevState,
+        form: formValues,
         error: "An unexpected error has occurred",
         status: "ERROR",
       };
@@ -88,8 +87,6 @@ const StartupForm = () => {
     status: "INITIAL",
   });
 
-  console.log("STATE", state);
-
   return (
     <form action={formAction} className="startup-form">
       <div>
@@ -97,6 +94,7 @@ const StartupForm = () => {
           Title
         </label>
         <Input
+          defaultValue={state?.form?.title}
           id="title"
           name="title"
           className="startup-form_input"
@@ -112,6 +110,7 @@ const StartupForm = () => {
           Description
         </label>
         <Textarea
+          defaultValue={state?.form?.description}
           id="description"
           name="description"
           className="startup-form_textarea"
@@ -129,6 +128,7 @@ const StartupForm = () => {
           Category
         </label>
         <Input
+          defaultValue={state?.form?.category}
           id="category"
           name="category"
           className="startup-form_input"
@@ -146,6 +146,7 @@ const StartupForm = () => {
           Image URL
         </label>
         <Input
+          defaultValue={state?.form?.link}
           id="link"
           name="link"
           className="startup-form_input"
