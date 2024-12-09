@@ -25,6 +25,7 @@ const StartupForm = () => {
     pitch: "",
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleFormSubmit = async (prevState: any, formData: FormData) => {
     try {
       formValues = {
