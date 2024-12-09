@@ -19,10 +19,10 @@ export const experimental_ppr = true;
 
 const Startup = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
-  console.log(id);
+
   const post = await client.fetch(STARTUP_BY_ID_QUERY, { id });
   const playlist = await client.fetch(PLAYLIST_BY_SLUG_QUERY, {
-    slug: "editor-picks",
+    slug: "editor-picks-december",
   });
 
   const editorPosts = playlist[0].select;
