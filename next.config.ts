@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    // TO DO: To be removed later
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {
