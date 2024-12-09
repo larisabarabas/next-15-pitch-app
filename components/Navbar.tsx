@@ -2,9 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { auth, signOut, signIn } from "@/auth";
+import { LogOut } from "lucide-react";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 const Navbar = async () => {
   const session = await auth();
+  console.log("SESSION Navbar", session?.id);
   return (
     <header className="px-2 py-3 bg-white shadow-sm font-work-sans">
       <nav className="flex justify-between items-center">
@@ -15,7 +18,7 @@ const Navbar = async () => {
           {session?.user ? (
             <>
               <Link href="/startup/create">
-                <span>Create</span>
+                <span className="max-sm:hidden">Create</span>
               </Link>
               <form
                 action={async () => {
@@ -23,10 +26,20 @@ const Navbar = async () => {
                   await signOut();
                 }}
               >
-                <button type="submit">Logout</button>
+                <button type="submit">
+                  <span className="max-sm:hidden text-red-500 font-medium">
+                    Logout
+                  </span>
+                  <LogOut className="size-6 sm:hidden text-red-500" />
+                </button>
               </form>
-              <Link href={`/user/${session?.user?.id}`}>
-                <span>{session?.user?.name}</span>
+              <Link href={`/user/${session?.id}`}>
+                <Avatar className="size-10">
+                  <AvatarImage
+                    src={session?.user?.image ?? "https://placehold.co/40x40"}
+                    alt={session?.user?.name ?? ""}
+                  />
+                </Avatar>
               </Link>
             </>
           ) : (

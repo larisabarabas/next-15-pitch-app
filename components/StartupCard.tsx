@@ -1,10 +1,11 @@
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 import { Author, Startup } from "@/sanity/types";
+import { Skeleton } from "./ui/skeleton";
 
 export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
 
@@ -20,7 +21,6 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
     _id,
   } = post;
 
-  console.log(author);
   return (
     <li className="startup-card group">
       <div className="flex-between">
@@ -65,4 +65,13 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
   );
 };
 
+export const StartupCardSkeleton = () => (
+  <>
+    {[0, 1, 2, 3, 4].map((index: number) => (
+      <li key={cn("skeleton", index)}>
+        <Skeleton className="startup-card_skeleton" />
+      </li>
+    ))}
+  </>
+);
 export default StartupCard;
