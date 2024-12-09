@@ -46,4 +46,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Vercel link
 
-[https://next-15-pitch-tmgw8j8w0-larisabarabas-projects.vercel.app](https://next-15-pitch-tmgw8j8w0-larisabarabas-projects.vercel.app)
+[https://next-15-pitch-nd56opyk7-larisabarabas-projects.vercel.app](https://next-15-pitch-nd56opyk7-larisabarabas-projects.vercel.app/)
