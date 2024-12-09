@@ -12,7 +12,6 @@ const View = async ({ id }: { id: string }) => {
     .fetch(STARTUP_VIEWS_QUERY, { id });
 
   after(async () => {
-    console.log("I am in AFTER");
     await writeClient
       .patch(id)
       .set({ views: totalViews + 1 })
